@@ -7,12 +7,51 @@ public class Main {
     public static void main(String[] args) {
         t.speed(100);
         t.setPosition(0, 0);
-        tiltTriangle(100, 120, 0, 360);
+//        tiltTriangle(100, 120, 0, 30);
 //        serpinski(-100, -100, 0, 100, 100, -100, 5);
-//        triangle(0, 0, 50, 100, 100, 0);
-//        System.out.println("Hello World!");
-//        recursiveHexagon(50, 0, 0, 2);
 //        recursiveSquare(300, 0, 0, 3);
+//        t.speed(15);
+//        t.setDirection(90);
+//        t.up();
+//        t.setPosition(0, -200);
+//        t.down();
+//        tree(100);
+//        t.speed(1);
+//        recursiveH(0, 0, 150, 4);
+    }
+
+    public static void h(double x, double y, double size) {
+        t.up();
+        t.setPosition(x-size, y+size);
+        t.setDirection(-90);
+        t.down();
+        t.forward(size*2);
+        t.backward(size);
+        t.setDirection(0);
+        t.forward(size*2);
+        t.right(90);
+        t.forward(size);
+        t.backward(size*2);
+    }
+
+    public static void triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+        t.up();
+        t.setPosition(x1, y1);
+        t.down();
+        t.setPosition(x2, y2);
+        t.setPosition(x3, y3);
+        t.setPosition(x1, y1);
+    }
+
+    public static void recursiveH(double x, double y, double size, double iters) {
+        if (iters > 0) {
+            h(x, y, size);
+
+            recursiveH(x-size, y+size, size/2, iters-1);
+            recursiveH(x+size, y+size, size/2, iters-1);
+            recursiveH(x-size, y-size, size/2, iters-1);
+            recursiveH(x+size, y-size, size/2, iters-1);
+        }
     }
 
     public static void recursiveSquare(double size, double x, double y, int iters) {
@@ -46,15 +85,6 @@ public class Main {
         }
         tiltTriangle(size, angle, tiltAngle+1, iters-1);
         System.out.println(tiltAngle);
-    }
-
-    public static void triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
-        t.up();
-        t.setPosition(x1, y1);
-        t.down();
-        t.setPosition(x2, y2);
-        t.setPosition(x3, y3);
-        t.setPosition(x1, y1);
     }
 
     public static void serpinski(int x1, int y1, int x2, int y2, int x3, int y3, int iter) {
@@ -93,6 +123,18 @@ public class Main {
         for (int i=0; i<6; i++) {
             t.forward(size);
             t.right(60);
+        }
+    }
+
+    public static void tree(int length) {
+        if (length > 5) {
+            t.forward(length);
+            t.right(20);
+            tree(length-15);
+            t.left(40);
+            tree(length-10);
+            t.right(20);
+            t.backward(length);
         }
     }
 
