@@ -500,7 +500,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
     private boolean isPenDown=true;
     private boolean isFilling=false;
     private boolean isVisible=true;
-    private ArrayList<Point2D.Double> polygon=new ArrayList<Point2D.Double>();
+    private final ArrayList<Point2D.Double> polygon=new ArrayList<Point2D.Double>();
     //temporary storage
     private Long _time;
     private Point2D.Double _location;
@@ -2314,8 +2314,8 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
             }
             updateAll();
         }
-        this.x=e.getX();
-        this.y=e.getY();
+        x=e.getX();
+        y=e.getY();
     }
 
     /**
@@ -2385,7 +2385,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
                     try
                     {
                         Class cls = Class.forName(className);
-                        Object clsInstance = (Object) cls.newInstance();
+                        Object clsInstance = cls.newInstance();
                         Method m = clsInstance.getClass().getMethod(methodName, t.getClass());
                         m.invoke(clsInstance, t);
                     }
@@ -2394,7 +2394,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
                         try
                         {
                             Class cls = Class.forName(className);
-                            Object clsInstance = (Object) cls.newInstance();
+                            Object clsInstance = cls.newInstance();
                             Method m = clsInstance.getClass().getMethod(methodName, t.getClass(), keyText.getClass());
                             m.invoke(clsInstance, t, keyText);
                         }
@@ -2403,7 +2403,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
                             try
                             {
                                 Class cls = Class.forName(className);
-                                Object clsInstance = (Object) cls.newInstance();
+                                Object clsInstance = cls.newInstance();
                                 Method m = clsInstance.getClass().getMethod(methodName);
                                 m.invoke(clsInstance);
                             }
@@ -2500,7 +2500,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
      */
     public static int mouseX()
     {
-        return turtle.x;
+        return x;
     }
 
     /**
@@ -2510,7 +2510,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
      */
     public static int mouseY()
     {
-        return turtle.y;
+        return y;
     }
 
     /**
@@ -2530,7 +2530,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
      */
     public static boolean mouseButton1()
     {
-        return (turtle.modifiers&16)==16;
+        return (modifiers&16)==16;
     }
 
     /**
@@ -2540,7 +2540,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
      */
     public static boolean mouseButton2()
     {
-        return (turtle.modifiers&8)==8;
+        return (modifiers&8)==8;
     }
 
     /**
@@ -2550,7 +2550,7 @@ public class Turtle implements Runnable, ActionListener, MouseListener, MouseMot
      */
     public static boolean mouseButton3()
     {
-        return (turtle.modifiers&4)==4;
+        return (modifiers&4)==4;
     }
 
     /**
